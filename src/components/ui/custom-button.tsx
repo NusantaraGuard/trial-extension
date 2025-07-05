@@ -1,7 +1,7 @@
 import React from "react";
 
 interface NeoButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: string;
+  icon?: string;
   children: React.ReactNode;
   onClick: () => void;
   classname?: string;
