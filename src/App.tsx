@@ -4,6 +4,9 @@ import { ThemeProvider } from "./components/ui/theme-provider"
 import { useState } from "react";
 import cryptoCards from "./interfaces/carousel";
 import topBarImage from "./assets/Illus.svg"
+import NeoButton from "./components/ui/custom-button";
+import AnalyzeAddress from "./assets/analyze_address.svg";
+import AnalyzeContract from "./assets/analyze_contract.svg";
 
 function App() {
   const address = "0x1234567890abcdef1234567890abcdef12345678"
@@ -32,7 +35,7 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <div className="w-[375px] h-[570px] p-4 space-y-4 bg-[#25262B] text-white general-sans shadow-md">
+    <div className="w-[400px] h-[570px] p-4 space-y-4 bg-[#25262B] text-white general-sans shadow-md">
 
       { /* Header Sections */}
       <div className="flex flex-row justify-between items-center bg-[#1C1D22]">
@@ -66,6 +69,7 @@ function App() {
               <img 
                 src={topBarImage}
                 alt={currentCard.name}
+                className="w-full object-cover transition-transform duration-500 transform"
                 />
 
               <div className="p-6 relative -mt-10">
@@ -96,6 +100,17 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="flex flex-row">
+        <div className="basis-1/2 p-1">
+          <NeoButton icon={AnalyzeContract} onClick={() => console.log('Analyze Contract')}> Analyze Contract 
+          </NeoButton>
+        </div>
+        <div className="basis-1/2 p-1">
+          <NeoButton icon={AnalyzeAddress} onClick={() => console.log('Analyze Address')}> Analyze Address 
+          </NeoButton>
         </div>
       </div>
     </div>
