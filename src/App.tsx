@@ -1,5 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon, Copy } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { ThemeProvider } from "./components/ui/theme-provider"
 import { useState } from "react";
 import cryptoCards from "./interfaces/carousel";
@@ -7,9 +6,11 @@ import topBarImage from "./assets/Illus.svg"
 import NeoButton from "./components/ui/custom-button";
 import AnalyzeAddress from "./assets/analyze_address.svg";
 import AnalyzeContract from "./assets/analyze_contract.svg";
+import Bitcoin from "./assets/bitcoin.svg";
+import ProfileHeader from "./components/ui/header";
+import { Separator } from "./components/ui/separator";
 
 function App() {
-  const address = "0x1234567890abcdef1234567890abcdef12345678"
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
@@ -28,40 +29,22 @@ function App() {
   const priceChangeColor = currentCard.change >= 0 ? 'text-green-500' : 'text-red-500';
   const priceChangeIcon = currentCard.change >= 0 ? '+' : '';
 
-  const truncateAddress = address.length > 4
-    ? `${address.substring(0, 2)}..${address.substring(address.length - 2)}`
-    : address;
-
-
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <div className="w-[400px] h-[570px] p-4 space-y-4 bg-[#25262B] text-white general-sans shadow-md">
+    <div className="w-[400px] h-[570px] space-y-4 bg-[#25262B] text-white shadow-md">
 
       { /* Header Sections */}
-      <div className="flex flex-row justify-between items-center bg-[#1C1D22]">
-        <div className="basis-64">
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" className="w-44 h-44"/>
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </div>
-        <div className="basis-64 flex flex-col items-center justify-center">
-          <h1 className="text-[14px] font-medium">Neu's Wall</h1>
-          <div className="flex flex-row items-center space-x-2">
-            <p className="text-sm text-[#777777]">{truncateAddress}</p>
-            <Copy className="w-[14px] h-[14px] text-[#777777]"/>
-          </div>
-        </div>
-        <div className="basis-64 flex justify-end">
-          <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png"/>
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </div>
-      </div>
+      <ProfileHeader
+          mainAvatarSrc='https://github.com/shadcn.png'
+          mainAvatarFallback='N'
+          title="Indra's Wallet"
+          address='0x1A2b3c4D5e6F7a8B9c0D1e2F3a4B5c6D7e8F9g0H'
+          secondaryAvatarSrc='https://github.com/shadcn.png'
+          secondaryAvatarFallback='CN'
+        />
 
       { /* Carousel Section */}
-      <div className="bg-[#1F2128] flex items-center justify-center">
+      <div className="bg-[#1F2128] m-4 flex items-center justify-center">
         <div className="w-full h-[194px]">
           <div className="bg-[#1e1e1e] overflow-hidden transition-all duration-500">
             <div className="h-48 w-full overflow-hidden">
@@ -81,7 +64,7 @@ function App() {
 
                 <div className="flex flex-row items-center justify-between mt-4">
                   <button onClick={prevSlide} className="p-3 rounded-full bg-[#333333] text-gray-400 hover:bg-[#444444] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1e1e1e] focus:ring-blue-500">
-                    <ChevronLeftIcon />
+                    <ChevronLeftIcon className="w-5 h-5"/>
                   </button>
 
                   <div className="text-center">
@@ -94,7 +77,7 @@ function App() {
                   </div>
 
                   <button onClick={nextSlide} className="p-3 rounded-full bg-[#333333] text-gray-400 hover:bg-[#444444] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1e1e1e] focus:ring-blue-500">
-                    <ChevronRightIcon />
+                    <ChevronRightIcon className="w-5 h-5"/>
                   </button>
                 </div>
               </div>
@@ -103,7 +86,8 @@ function App() {
         </div>
       </div>
 
-      <div className="flex flex-row">
+      { /* Analyze and Scan Address Section */}
+      <div className="flex flex-row m-4">
         <div className="basis-1/2 p-1">
           <NeoButton icon={AnalyzeContract} onClick={() => console.log('Analyze Contract')}> Analyze Contract 
           </NeoButton>
@@ -113,6 +97,29 @@ function App() {
           </NeoButton>
         </div>
       </div>
+
+      { /* History Section */}
+      <div className="flex flex-row justify-between m-4">
+        <h1 className="text-[16px] font-semibold">History</h1>
+        <button className="text-[#99E39E] text-[14px] group-hover:text-green">View All</button>
+      </div>
+
+      <div className="flex flex-col items-center m-4">
+        {Array.from({ length: 2 }).map((_, index) => (
+          <div key={index} className="w-full mb-4">
+            <div className="flex flex-row justify-between items-center w-full pb-5">
+              <img src={Bitcoin} alt="Ethereum" className="pe-4"/>
+              <div className="flex flex-col text-left grow-7">
+                <p className="text-white">0x1234567890abcdef</p>
+                <p className="text-white/50">Transaction - AI</p>
+              </div>
+              <p className="grow-3 text-end">24/04/35</p>
+            </div>
+            <Separator />
+          </div>
+        ))}
+      </div>
+
     </div>
     </ThemeProvider>
   )

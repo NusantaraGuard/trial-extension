@@ -2,7 +2,7 @@
 
 interface CryptoData {
   name: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  icon: string | React.FC<React.SVGProps<SVGSVGElement>>;
   price: number;
   change: number;
 }
