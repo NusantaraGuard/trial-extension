@@ -8,9 +8,12 @@ import Bitcoin from "../assets/bitcoin.svg";
 import ProfileHeader from "../components/ui/header";
 import { Separator } from "../components/ui/separator";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/constants/routes";
 
 function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -86,11 +89,11 @@ function Home() {
       { /* Analyze and Scan Address Section */}
       <div className="flex flex-row m-4">
         <div className="basis-1/2 p-1">
-          <NeoButton icon={AnalyzeContract} onClick={() => console.log('Analyze Contract')}> Analyze Contract 
+          <NeoButton icon={AnalyzeContract} onClick={() => navigate(ROUTES.ANALYZE_SMART_CONTRACT)}> Analyze Contract 
           </NeoButton>
         </div>
         <div className="basis-1/2 p-1">
-          <NeoButton icon={AnalyzeAddress} onClick={() => console.log('Analyze Address')}> Analyze Address 
+          <NeoButton icon={AnalyzeAddress} onClick={() => navigate(ROUTES.ANALYZE_ADDRESS)}> Analyze Address 
           </NeoButton>
         </div>
       </div>
